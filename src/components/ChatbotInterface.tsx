@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Send, Bot, User, Heart, RefreshCw } from "lucide-react";
+import { Send, Bot, User, Code, RefreshCw } from "lucide-react";
 import { geminiService } from "@/services/GeminiService";
 import { useProjectManager, Project } from "./ProjectManager";
 import { toast } from "sonner";
@@ -100,21 +100,21 @@ export const ChatbotInterface = ({ user, initialPrompt, onSignOut }: ChatbotInte
   };
 
   return (
-    <div className="h-screen w-full bg-background flex">
+    <div className="h-screen w-full bg-gray-950 flex">
       {/* Chat Panel - Small Left Side */}
-      <div className="w-80 border-r border-border bg-card/30 flex flex-col">
+      <div className="w-80 border-r border-gray-800 bg-gray-900/50 flex flex-col">
         {/* Chat Header */}
-        <div className="p-4 border-b border-border">
+        <div className="p-4 border-b border-gray-800">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Heart className="h-5 w-5 text-red-500 fill-current" />
-              <span className="font-semibold">Lovable</span>
+              <Code className="h-5 w-5 text-cyan-400" />
+              <span className="font-semibold text-white">CloudAI</span>
             </div>
             <Button 
               variant="ghost" 
               size="sm" 
               onClick={onSignOut}
-              className="text-muted-foreground hover:text-foreground"
+              className="text-gray-400 hover:text-white"
             >
               {user.name.split(' ')[0]}
             </Button>
@@ -122,7 +122,7 @@ export const ChatbotInterface = ({ user, initialPrompt, onSignOut }: ChatbotInte
         </div>
 
         {/* Chat Messages */}
-        <ScrollArea className="flex-1 p-4">
+        <ScrollArea className="flex-1 p-4 bg-gray-900/30">{/* Darker background */}
           <div className="space-y-4">
             {messages.map((message) => (
               <div
@@ -139,8 +139,8 @@ export const ChatbotInterface = ({ user, initialPrompt, onSignOut }: ChatbotInte
                 <div
                   className={`max-w-[85%] rounded-lg p-3 text-sm ${
                     message.type === 'user'
-                      ? 'bg-primary text-primary-foreground ml-8'
-                      : 'bg-muted'
+                      ? 'bg-cyan-600 text-white ml-8'
+                      : 'bg-gray-800 text-gray-100 border border-gray-700'
                   }`}
                 >
                   <p className="whitespace-pre-wrap">{message.content}</p>
@@ -157,12 +157,12 @@ export const ChatbotInterface = ({ user, initialPrompt, onSignOut }: ChatbotInte
             ))}
             {isLoading && (
               <div className="flex gap-3">
-                <Bot className="h-5 w-5 text-primary animate-pulse mt-1" />
-                <div className="bg-muted rounded-lg p-3 max-w-[85%]">
+                <Bot className="h-5 w-5 text-cyan-400 animate-pulse mt-1" />
+                <div className="bg-gray-800 border border-gray-700 rounded-lg p-3 max-w-[85%]">
                   <div className="flex gap-1">
-                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
-                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce delay-100"></div>
-                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce delay-200"></div>
+                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce delay-100"></div>
+                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce delay-200"></div>
                   </div>
                 </div>
               </div>
@@ -172,20 +172,20 @@ export const ChatbotInterface = ({ user, initialPrompt, onSignOut }: ChatbotInte
         </ScrollArea>
 
         {/* Chat Input */}
-        <div className="p-4 border-t border-border">
+        <div className="p-4 border-t border-gray-800 bg-gray-900/50">{/* Darker background */}
           <form onSubmit={handleSubmit} className="flex gap-2">
             <Input
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask me to modify your app..."
               disabled={isLoading}
-              className="flex-1 text-sm"
+              className="flex-1 text-sm bg-gray-800 border-gray-700 text-white placeholder:text-gray-400 focus:border-cyan-400"
             />
             <Button
               type="submit"
               disabled={isLoading || !input.trim()}
               size="sm"
-              className="px-3"
+              className="px-3 bg-cyan-600 hover:bg-cyan-700"
             >
               <Send className="h-4 w-4" />
             </Button>
@@ -194,14 +194,14 @@ export const ChatbotInterface = ({ user, initialPrompt, onSignOut }: ChatbotInte
       </div>
 
       {/* Preview Panel - Large Right Side */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col bg-gray-950">
         {/* Preview Header */}
-        <div className="h-12 border-b border-border bg-card/50 flex items-center justify-between px-4">
-          <h3 className="font-semibold text-sm">
+        <div className="h-12 border-b border-gray-800 bg-gray-900/50 flex items-center justify-between px-4">
+          <h3 className="font-semibold text-sm text-white">
             {currentProject ? `Preview: ${currentProject.name}` : 'Live Preview'}
           </h3>
           <div className="flex gap-2">
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" className="border-gray-700 text-gray-300 hover:bg-gray-800">
               <RefreshCw className="h-4 w-4 mr-2" />
               Refresh
             </Button>
@@ -209,7 +209,7 @@ export const ChatbotInterface = ({ user, initialPrompt, onSignOut }: ChatbotInte
         </div>
 
         {/* Preview Content */}
-        <div className="flex-1 bg-muted/20 p-4">
+        <div className="flex-1 bg-gray-900/20 p-4">{/* Darker background */}
           {currentProject ? (
             <div className="w-full h-full bg-white rounded-lg shadow-lg border overflow-hidden">
               <iframe
@@ -219,13 +219,13 @@ export const ChatbotInterface = ({ user, initialPrompt, onSignOut }: ChatbotInte
               />
             </div>
           ) : (
-            <div className="w-full h-full bg-white rounded-lg shadow-lg border flex items-center justify-center">
+            <div className="w-full h-full bg-gray-800 rounded-lg shadow-lg border border-gray-700 flex items-center justify-center">
               <div className="text-center">
-                <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <Heart className="h-8 w-8 text-gray-400" />
+                <div className="w-16 h-16 bg-gray-700 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <Code className="h-8 w-8 text-gray-400" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-600 mb-2">Your app will appear here</h3>
-                <p className="text-gray-400">Start chatting to see your creation come to life!</p>
+                <h3 className="text-lg font-semibold text-gray-300 mb-2">Your app will appear here</h3>
+                <p className="text-gray-500">Start chatting to see your creation come to life!</p>
               </div>
             </div>
           )}

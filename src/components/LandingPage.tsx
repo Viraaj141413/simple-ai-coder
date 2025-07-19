@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { Sparkles, Code, Zap, Rocket, ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles, Code, Zap } from "lucide-react";
 
 interface LandingPageProps {
   onSignUp: (email: string, name: string) => void;
@@ -18,7 +18,6 @@ export const LandingPage = ({ onSignUp }: LandingPageProps) => {
     if (!email.trim() || !name.trim()) return;
     
     setIsLoading(true);
-    // Simulate signup process
     setTimeout(() => {
       onSignUp(email, name);
       setIsLoading(false);
@@ -26,57 +25,63 @@ export const LandingPage = ({ onSignUp }: LandingPageProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-background overflow-hidden relative">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/20 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent/20 rounded-full blur-3xl animate-float delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse-glow"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-float delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse-glow"></div>
       </div>
 
       {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6">
         {/* Hero Section */}
-        <div className="text-center mb-12 max-w-4xl">
-          <div className="flex items-center justify-center gap-3 mb-6">
+        <div className="text-center mb-12 max-w-5xl">
+          <div className="flex items-center justify-center gap-3 mb-8">
             <div className="relative">
-              <Zap className="h-12 w-12 text-primary animate-pulse-glow" />
-              <Sparkles className="h-6 w-6 text-accent absolute -top-1 -right-1 animate-float" />
+              <Zap className="h-16 w-16 text-cyan-400 animate-pulse-glow" />
+              <Sparkles className="h-8 w-8 text-blue-400 absolute -top-2 -right-2 animate-float" />
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold ai-gradient bg-clip-text text-transparent">
-              AI Builder
+            <h1 className="text-6xl md:text-8xl font-bold">
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
+                CloudAI
+              </span>
             </h1>
           </div>
           
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed">
-            Turn your ideas into <span className="text-primary font-semibold">working apps</span> in seconds.<br />
-            Just describe what you want, and watch AI build it for you.
+          <p className="text-2xl md:text-3xl text-gray-300 mb-4 leading-relaxed">
+            Build anything with <span className="text-cyan-400 font-semibold">artificial intelligence</span>
+          </p>
+          
+          <p className="text-lg text-gray-400 mb-12 max-w-2xl mx-auto">
+            Create complete web applications, games, tools and more. 
+            Just describe what you want and watch AI build it for you in seconds.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            <div className="flex items-center gap-2 bg-muted/50 px-4 py-2 rounded-full">
-              <Code className="h-4 w-4 text-primary" />
-              <span className="text-sm">No coding required</span>
+          <div className="flex flex-wrap justify-center gap-4 mb-16">
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full border border-white/20">
+              <Code className="h-5 w-5 text-cyan-400" />
+              <span className="text-white font-medium">No coding required</span>
             </div>
-            <div className="flex items-center gap-2 bg-muted/50 px-4 py-2 rounded-full">
-              <Rocket className="h-4 w-4 text-accent" />
-              <span className="text-sm">Instant deployment</span>
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full border border-white/20">
+              <Zap className="h-5 w-5 text-blue-400" />
+              <span className="text-white font-medium">Instant generation</span>
             </div>
-            <div className="flex items-center gap-2 bg-muted/50 px-4 py-2 rounded-full">
-              <Sparkles className="h-4 w-4 text-primary" />
-              <span className="text-sm">AI-powered</span>
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full border border-white/20">
+              <Sparkles className="h-5 w-5 text-purple-400" />
+              <span className="text-white font-medium">AI-powered</span>
             </div>
           </div>
         </div>
 
         {/* Sign Up Form */}
-        <Card className="w-full max-w-md p-8 bg-card/50 backdrop-blur-sm border-border/50 shadow-2xl">
-          <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold mb-2">Get Started Free</h2>
-            <p className="text-muted-foreground">Join thousands of builders creating with AI</p>
+        <Card className="w-full max-w-md p-8 bg-black/40 backdrop-blur-lg border-white/10 shadow-2xl">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-white mb-3">Get Started Free</h2>
+            <p className="text-gray-400">Join thousands building with AI</p>
           </div>
 
-          <form onSubmit={handleSignUp} className="space-y-4">
+          <form onSubmit={handleSignUp} className="space-y-6">
             <div>
               <Input
                 type="text"
@@ -84,7 +89,7 @@ export const LandingPage = ({ onSignUp }: LandingPageProps) => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="h-12 bg-background/50 border-border/50 focus:border-primary transition-colors"
+                className="h-14 bg-white/5 border-white/20 text-white placeholder:text-gray-400 focus:border-cyan-400 transition-colors text-lg"
               />
             </div>
             <div>
@@ -94,69 +99,63 @@ export const LandingPage = ({ onSignUp }: LandingPageProps) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="h-12 bg-background/50 border-border/50 focus:border-primary transition-colors"
+                className="h-14 bg-white/5 border-white/20 text-white placeholder:text-gray-400 focus:border-cyan-400 transition-colors text-lg"
               />
             </div>
             <Button
               type="submit"
               disabled={isLoading || !email.trim() || !name.trim()}
-              className="w-full h-12 ai-gradient hover:opacity-90 transition-opacity text-lg font-semibold"
+              className="w-full h-14 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white text-lg font-semibold transition-all duration-300 transform hover:scale-105"
             >
               {isLoading ? (
                 <>
-                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-3"></div>
                   Creating your account...
                 </>
               ) : (
                 <>
-                  Start Building
+                  Start Building with AI
                   <ArrowRight className="h-5 w-5 ml-2" />
                 </>
               )}
             </Button>
           </form>
-
-          <div className="mt-6 text-center">
-            <p className="text-xs text-muted-foreground">
-              By signing up, you agree to our Terms of Service and Privacy Policy
-            </p>
-          </div>
         </Card>
 
         {/* Features Preview */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl w-full">
-          <Card className="p-6 bg-card/30 backdrop-blur-sm border-border/50 hover:bg-card/50 transition-colors">
+        <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl w-full">
+          <Card className="p-8 bg-black/30 backdrop-blur-sm border-white/10 hover:bg-black/40 transition-all duration-300 hover:scale-105">
             <div className="text-center">
-              <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Code className="h-6 w-6 text-primary" />
+              <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <Code className="h-8 w-8 text-white" />
               </div>
-              <h3 className="font-semibold mb-2">Smart Code Generation</h3>
-              <p className="text-sm text-muted-foreground">
-                Advanced AI creates production-ready code from your descriptions
+              <h3 className="text-xl font-semibold text-white mb-4">Smart Code Generation</h3>
+              <p className="text-gray-400 leading-relaxed">
+                Advanced AI creates production-ready applications from simple descriptions
               </p>
             </div>
           </Card>
 
-          <Card className="p-6 bg-card/30 backdrop-blur-sm border-border/50 hover:bg-card/50 transition-colors">
+          <Card className="p-8 bg-black/30 backdrop-blur-sm border-white/10 hover:bg-black/40 transition-all duration-300 hover:scale-105">
             <div className="text-center">
-              <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Zap className="h-6 w-6 text-accent" />
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <Zap className="h-8 w-8 text-white" />
               </div>
-              <h3 className="font-semibold mb-2">Lightning Fast</h3>
-              <p className="text-sm text-muted-foreground">
-                Generate complete applications in under 30 seconds
+              <h3 className="text-xl font-semibold text-white mb-4">Lightning Fast</h3>
+              <p className="text-gray-400 leading-relaxed">
+                Generate complete applications in under 10 seconds with live preview
               </p>
             </div>
           </Card>
 
-          <Card className="p-6 bg-card/30 backdrop-blur-sm border-border/50 hover:bg-card/50 transition-colors">
+          <Card className="p-8 bg-black/30 backdrop-blur-sm border-white/10 hover:bg-black/40 transition-all duration-300 hover:scale-105">
             <div className="text-center">
-              <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Rocket className="h-6 w-6 text-primary" />
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <Sparkles className="h-8 w-8 text-white" />
               </div>
-              <h3 className="font-semibold mb-2">Instant Preview</h3>
-              <p className="text-sm text-muted-foreground">
-                See your app come to life with real-time preview and testing
+              <h3 className="text-xl font-semibold text-white mb-4">Multiple Formats</h3>
+              <p className="text-gray-400 leading-relaxed">
+                Creates HTML, CSS, JavaScript, React, TypeScript, and Tailwind files
               </p>
             </div>
           </Card>
